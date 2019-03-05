@@ -136,36 +136,51 @@ void EventAction::EndOfEventAction(const G4Event* event)
           ih1 = 0;
           fRunAction->Sump1Dose(eKin/eV);
       }                             
-      else if (pName == "carbon" || pName == "C12" || pName == "C13" || pName == "C14") {
+      else if (pName == "deuteron") {
           ih1 = 1;
+          fRunAction->Sumd1Dose(eKin/eV);
+      }
+      // this only starts occurring above 4 MeV, and even then the spectra can be ignored until
+      // closer to 10 MeV
+      else if (pName == "triton") {
+          ih1 = 2;
+          fRunAction->Sumt1Dose(eKin/eV);
+      }
+      else if (pName == "alpha") {
+          ih1 = 3;
+          fRunAction->Suma1Dose(eKin/eV);
+      }
+      else if (pName == "beryllium" || pName == "Be9" || pName == "Be10") {
+          ih1 = 4;
+          fRunAction->SumBe1Dose(eKin/eV);
+      }
+      // only B11 is produced by a reaction as far as I know, but may as well be safe
+      else if (pName == "boron" || pName == "B11" || pName == "B10") {
+          ih1 = 5;
+          fRunAction->SumB1Dose(eKin/eV);
+      }
+      else if (pName == "carbon" || pName == "C12" || pName == "C13" || pName == "C14" || pName == "C15") {
+          ih1 = 6;
           fRunAction->SumC1Dose(eKin/eV);
       }   
       else if (pName == "nitrogen" || pName == "N14" || pName == "N14" || pName == "N15") {
-          ih1 = 2;
+          ih1 = 7;
           fRunAction->SumN1Dose(eKin/eV);
       }
       else if (pName == "oxygen" || pName == "O16" || pName == "O17" || pName == "O18") {
-          ih1 = 3;
+          ih1 = 8;
           fRunAction->SumO1Dose(eKin/eV);
       }
-      else if (pName == "alpha") {
-          ih1 = 4;
-          fRunAction->Suma1Dose(eKin/eV);
-      }
-      else if (pName == "deuteron") {
-          ih1 = 5;
-          fRunAction->Sumd1Dose(eKin/eV);
-      }
       else if (pName == "e-" && eKin <= 1.*MeV) {
-          ih1 = 6;
+          ih1 = 9;
           fRunAction->Sume1Dose(eKin/eV);
       }
       else if (pName == "e+") {
-          ih1 = 7;
+          ih1 = 10;
           fRunAction->Sumep1Dose(eKin/eV);
       }
       else if (pName == "gamma") {
-          ih1 = 8;
+          ih1 = 11;
       }
 
       //G4cout << "histogram " << ih1 << G4endl;
@@ -188,39 +203,51 @@ void EventAction::EndOfEventAction(const G4Event* event)
 
       G4int ih2 = -1; 
       if (pName == "proton") {
-          ih2 = 9;
+          ih2 = 12;
           fRunAction->Sump2Dose(eKin/eV);
       }
-      else if (pName == "carbon" || pName == "C12" || pName == "C13" || pName == "C14") {
-          ih2 = 10;
+      else if (pName == "deuteron") {
+          ih2 = 13;
+          fRunAction->Sumd2Dose(eKin/eV);
+      }
+      else if (pName == "triton") {
+          ih2 = 14;
+          fRunAction->Sumt2Dose(eKin/eV);
+      }
+      else if (pName == "alpha") {
+          ih2 = 15;
+          fRunAction->Suma2Dose(eKin/eV);
+      }
+      else if (pName == "beryllium" || pName == "Be9" || pName == "Be10") {
+          ih2 = 16;
+          fRunAction->SumBe2Dose(eKin/eV);
+      }
+      else if (pName == "boron" || pName == "B11" || pName == "B10") {
+          ih2 = 17;
+          fRunAction->SumB2Dose(eKin/eV);
+      }
+      else if (pName == "carbon" || pName == "C12" || pName == "C13" || pName == "C14" || pName == "C15") {
+          ih2 = 18;
           fRunAction->SumC2Dose(eKin/eV);
       }
       else if (pName == "nitrogen" || pName == "N14" || pName == "N15") {
-          ih2 = 11;
+          ih2 = 19;
           fRunAction->SumN2Dose(eKin/eV);
       }
       else if (pName == "oxygen" || pName == "O16" || pName == "O17" || pName == "O18") {
-          ih2 = 12;
+          ih2 = 20;
           fRunAction->SumO2Dose(eKin/eV);
       }
-      else if (pName == "alpha") {
-          ih2 = 13;
-          fRunAction->Suma2Dose(eKin/eV);
-      }
-      else if (pName == "deuteron") {
-          ih2 = 14;
-          fRunAction->Sumd2Dose(eKin/eV);
-      }
       else if (pName == "e-" && eKin <= 1.*MeV) {
-          ih2 = 15;
+          ih2 = 21;
           fRunAction->Sume2Dose(eKin/eV);
       }
       else if (pName == "e+") {
-          ih2 = 16;
+          ih2 = 22;
           fRunAction->Sumep2Dose(eKin/eV);
       }
       else if (pName == "gamma") {
-          ih2 = 17;
+          ih2 = 23;
       }
 
       if (ih2 > -1) analysisManager->FillH1(ih2,eKin/eV);      
@@ -242,39 +269,51 @@ void EventAction::EndOfEventAction(const G4Event* event)
 
       G4int ih3 = -1; 
       if (pName == "proton") {
-          ih3 = 18;
+          ih3 = 24;
           fRunAction->Sump3Dose(eKin/eV);
       }
-      else if (pName == "carbon" || pName == "C12" || pName == "C13" || pName == "C14") {
-          ih3 = 19;
+      else if (pName == "deuteron") {
+          ih3 = 25;
+          fRunAction->Sumd3Dose(eKin/eV);
+      }
+      else if (pName == "triton") {
+          ih3 = 26;
+          fRunAction->Sumt1Dose(eKin/eV);
+      }
+      else if (pName == "alpha") {
+          ih3 = 27;
+          fRunAction->Suma3Dose(eKin/eV);
+      }
+      else if (pName == "beryllium" || pName == "Be9" || pName == "Be10") {
+          ih3 = 28;
+          fRunAction->SumBe3Dose(eKin/eV);
+      }
+      else if (pName == "boron" || pName == "B11" || pName == "B10") {
+          ih3 = 29;
+          fRunAction->SumB3Dose(eKin/eV);
+      }
+      else if (pName == "carbon" || pName == "C12" || pName == "C13" || pName == "C14" || pName == "C15") {
+          ih3 = 30;
           fRunAction->SumC3Dose(eKin/eV);
       }
       else if (pName == "nitrogen" || pName == "N14" || pName == "N15") {
-          ih3 = 20;
+          ih3 = 31;
           fRunAction->SumN3Dose(eKin/eV);
       }
       else if (pName == "oxygen" || pName == "O16" || pName == "O17" || pName == "O18") {
-          ih3 = 21;
+          ih3 = 32;
           fRunAction->SumO3Dose(eKin/eV);
       }
-      else if (pName == "alpha") {
-          ih3 = 22;
-          fRunAction->Suma3Dose(eKin/eV);
-      }
-      else if (pName == "deuteron") {
-          ih3 = 23;
-          fRunAction->Sumd3Dose(eKin/eV);
-      }
       else if (pName == "e-" && eKin <= 1.*MeV) {
-          ih3 = 24;
+          ih3 = 33;
           fRunAction->Sume3Dose(eKin/eV);
       }
       else if (pName == "e+") {
-          ih3 = 25;
+          ih3 = 34;
           fRunAction->Sumep3Dose(eKin/eV);
       }
       else if (pName == "gamma") {
-          ih3 = 26;
+          ih3 = 35;
       }
 
       if (ih3 > -1) analysisManager->FillH1(ih3,eKin/eV);      

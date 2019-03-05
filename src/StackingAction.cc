@@ -32,21 +32,20 @@ G4ClassificationOfNewTrack StackingAction::ClassifyNewTrack(const G4Track* aTrac
     // Only looking to kill charged particles and electrons below 1 MeV
     if ( charge != 0.0 ) {
 
-        if ( pName != "e-" || eKin <= 1.*MeV ) {
+        if ( (pName != "e-" && pName != "e+") || eKin <= 1.*MeV ) {
 
             classification = fKill;
            // G4cout << "Killed: " << pName << ", " << eKin/keV << " keV" << G4endl;
 
         }
         
-//        if ( pName != "proton" && pName != "C12" && pName != "C13" && pName != "C14" && 
-//                pName != "N14" && pName != "N15" && pName != "O16" && pName != "O17" && pName != "O18"
-//                && pName != "alpha" && pName != "deuteron" && pName != "e-" ) {
+//        if ( pName != "proton"  && pName != "deuteron" && pName != "triton" && pName != "alpha"
+//                && pName != "Be9" && pName != "Be10" && pName != "B11" && pName != "C12" 
+//                && pName != "C13" && pName != "C14" && pName != "C15" && pName != "N14"
+//                && pName != "N15" && pName != "O16" && pName != "O17" && pName != "O18" 
+//                && pName != "e-" && pName != "e+" ) {
 //
-//            G4cout << pName << ", " << eKin/keV << " keV killed and not recorded";
-//        }
-//        else {
-//            G4cout << "Not killed: " << pName << ", " << eKin/keV << " keV" << G4endl;
+//            G4cout << pName << ", " << eKin/keV << " keV killed and not recorded" << G4endl;
 //        }
 
     }
