@@ -1,0 +1,17 @@
+#!/bin/bash
+python WriteMacros.py 72 neutron 2MeV   2e+9 5 2019-03-05
+python WriteMacros.py 56 neutron 1.5MeV 2e+9 5 2019-03-05
+python WriteMacros.py 56 neutron 1.3MeV 2e+9 5 2019-03-05
+python WriteMacros.py 56 neutron 1.2MeV 2e+9 5 2019-03-05
+python WriteMacros.py 56 neutron 1.1MeV 2e+9 5 2019-03-05
+python WriteMacros.py 72 neutron 1MeV   2e+9 5 2019-03-05
+python WriteMacros.py 56 neutron 0.9MeV 2e+9 5 2019-03-05
+python WriteMacros.py 56 neutron 0.8MeV 2e+9 5 2019-03-05
+python WriteMacros.py 56 neutron 0.7MeV 2e+9 5 2019-03-05
+python WriteMacros.py 56 neutron 0.5MeV 2e+9 5 2019-03-05
+python WriteMacros.py 56 neutron 0.1MeV 2e+9 5 2019-03-05
+python WriteMacros.py 32 neutron 50keV  2e+9 5 2019-03-05
+python WriteMacros.py 32 neutron 10keV  2e+9 5 2019-03-05
+python WriteMacros.py 32 neutron 1keV   2e+9 5 2019-03-05
+python WriteMacros.py 32 neutron 100eV  2e+9 5 2019-03-05
+python WriteMacros.py 32 neutron 1eV    2e+9 5 2019-03-05

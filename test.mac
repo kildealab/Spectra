@@ -1,0 +1,25 @@
+# Initialize the kernel
+/run/numberOfThreads 2
+/run/initialize
+
+/gps/verbose    0
+/gps/particle   neutron
+/gps/ene/type   Mono
+
+/gps/pos/type    Surface
+/gps/pos/shape   Sphere
+/gps/pos/centre  0 0 0 cm
+
+/gps/pos/radius 20 cm
+
+
+/gps/ang/type   cos
+
+/gps/number     1
+
+
+/gps/ene/mono   5000000 eV
+
+/analysis/setFileName Testing
+
+/run/beamOn 100000
