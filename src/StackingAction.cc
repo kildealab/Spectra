@@ -32,7 +32,8 @@ G4ClassificationOfNewTrack StackingAction::ClassifyNewTrack(const G4Track* aTrac
     // Only looking to kill charged particles and electrons below 1 MeV
     if ( charge != 0.0 ) {
 
-        if ( (pName != "e-" && pName != "e+") || eKin <= 1.*MeV ) {
+        //if ( (pName != "e-" && pName != "e+") || eKin <= 1.*MeV ) {
+        if ( pName != "e-" || eKin <= 1.*MeV ) {
 
             classification = fKill;
            // G4cout << "Killed: " << pName << ", " << eKin/keV << " keV" << G4endl;

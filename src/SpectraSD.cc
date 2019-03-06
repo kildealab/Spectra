@@ -72,10 +72,16 @@ G4bool SpectraSD::ProcessHits(G4Step* step, G4TouchableHistory*)
         G4String pName = particle->GetParticleName();
         G4double eKin = track->GetKineticEnergy();
 
+        // >1 MeV electrons are handled separately
+        if ( pName != "e-" || eKin <= 1.*MeV ) {
+
+            SpectraHit* hit = new SpectraHit(pName, eKin);
+            fHitsCollection->insert(hit);
+
+        }
+
         // G4cout << pName << " produced with energy " << G4BestUnit(eKin, "Energy") << " in SpectraSD" << G4endl;
 
-        SpectraHit* hit = new SpectraHit(pName, eKin);
-        fHitsCollection->insert(hit);
 
     }
 

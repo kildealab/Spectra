@@ -67,6 +67,10 @@ class RunAction : public G4UserRunAction
     void Sumep2Dose(G4double dose) { fep2Dose += dose; }
     void Sumep3Dose(G4double dose) { fep3Dose += dose; }
 
+    void Sum1Dose(G4double dose) { f1Dose += dose; }
+    void Sum2Dose(G4double dose) { f2Dose += dose; }
+    void Sum3Dose(G4double dose) { f3Dose += dose; }
+
 
   private:
   	//HistoManager*           fHistoManager;
@@ -114,6 +118,10 @@ class RunAction : public G4UserRunAction
     G4Accumulable<G4double> fep1Dose;
     G4Accumulable<G4double> fep2Dose;
     G4Accumulable<G4double> fep3Dose;
+
+    G4Accumulable<G4double> f1Dose;
+    G4Accumulable<G4double> f2Dose;
+    G4Accumulable<G4double> f3Dose;
 
 
 };

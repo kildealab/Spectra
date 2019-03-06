@@ -119,6 +119,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
   // May need to update SpectraHit definition to take a G4ParticleDefinition rather than a particle name
   G4String pName;
   G4double eKin;
+  G4double energy;
+  G4int    record;
   for (G4int i1=0; i1<nSec1; i1++)
   {
       SpectraHit* particle = (*spectra1HC)[i1];
@@ -132,6 +134,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
       //fRunAction->EnergySpectrumOfSecondaries(pName, eKin);
 
       G4int ih1 = -1; 
+      record    = 0;
       if (pName == "proton") {
           ih1 = 0;
           fRunAction->Sump1Dose(eKin/eV);
@@ -171,13 +174,17 @@ void EventAction::EndOfEventAction(const G4Event* event)
           ih1 = 8;
           fRunAction->SumO1Dose(eKin/eV);
       }
-      else if (pName == "e-" && eKin <= 1.*MeV) {
+      // The >1 MeV electrons were already filtered out of the hit collection in SpectraSD
+      else if (pName == "e-") {
           ih1 = 9;
           fRunAction->Sume1Dose(eKin/eV);
       }
+      // Upper bound on positron dose - to show it can be ignored
       else if (pName == "e+") {
           ih1 = 10;
-          fRunAction->Sumep1Dose(eKin/eV);
+          energy = eKin + 511.*keV;
+          fRunAction->Sumep1Dose(energy/eV);
+          record = -1;
       }
       else if (pName == "gamma") {
           ih1 = 11;
@@ -186,6 +193,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
       //G4cout << "histogram " << ih1 << G4endl;
       if (ih1 > -1) analysisManager->FillH1(ih1,eKin/eV);      
       //if (ih1 > -1) fHistoManager->FillHisto(ih1,eKin);
+
+      if (record > -1) fRunAction->Sum1Dose(eKin/eV);
 
   }
 
@@ -202,6 +211,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
       //fRunAction->EnergySpectrumOfSecondaries(pName, eKin);
 
       G4int ih2 = -1; 
+      record    = 0;
       if (pName == "proton") {
           ih2 = 12;
           fRunAction->Sump2Dose(eKin/eV);
@@ -238,13 +248,15 @@ void EventAction::EndOfEventAction(const G4Event* event)
           ih2 = 20;
           fRunAction->SumO2Dose(eKin/eV);
       }
-      else if (pName == "e-" && eKin <= 1.*MeV) {
+      else if (pName == "e-") {
           ih2 = 21;
           fRunAction->Sume2Dose(eKin/eV);
       }
       else if (pName == "e+") {
           ih2 = 22;
-          fRunAction->Sumep2Dose(eKin/eV);
+          energy = eKin + 511.*keV;
+          fRunAction->Sumep2Dose(energy/eV);
+          record = -1;
       }
       else if (pName == "gamma") {
           ih2 = 23;
@@ -252,6 +264,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
 
       if (ih2 > -1) analysisManager->FillH1(ih2,eKin/eV);      
       //if (ih2 > -1) fHistoManager->FillHisto(ih2,eKin/eV);      
+      
+      if (record > -1) fRunAction->Sum2Dose(eKin/eV);
       
   }
 
@@ -268,6 +282,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
       //fRunAction->EnergySpectrumOfSecondaries(pName, eKin);
 
       G4int ih3 = -1; 
+      record    = 0;
       if (pName == "proton") {
           ih3 = 24;
           fRunAction->Sump3Dose(eKin/eV);
@@ -304,20 +319,24 @@ void EventAction::EndOfEventAction(const G4Event* event)
           ih3 = 32;
           fRunAction->SumO3Dose(eKin/eV);
       }
-      else if (pName == "e-" && eKin <= 1.*MeV) {
+      else if (pName == "e-") {
           ih3 = 33;
           fRunAction->Sume3Dose(eKin/eV);
       }
       else if (pName == "e+") {
           ih3 = 34;
-          fRunAction->Sumep3Dose(eKin/eV);
+          energy = eKin + 511.*keV;
+          fRunAction->Sumep3Dose(energy/eV);
+          record = -1;
       }
       else if (pName == "gamma") {
           ih3 = 35;
       }
 
-      if (ih3 > -1) analysisManager->FillH1(ih3,eKin/eV);      
+      if (ih3 > -1)   analysisManager->FillH1(ih3,eKin/eV);      
       //if (ih3 > -1) fHistoManager->FillHisto(ih3,eKin/eV);
+
+      if (record > -1) fRunAction->Sum3Dose(eKin/eV);
       
   }
 

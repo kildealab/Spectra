@@ -50,7 +50,10 @@ RunAction::RunAction() //(HistoManager* histo)
     fe3Dose(0.),
     fep1Dose(0.),
     fep2Dose(0.),
-    fep3Dose(0.)
+    fep3Dose(0.),
+    f1Dose(0.),
+    f2Dose(0.),
+    f3Dose(0.)
 {
     // Set the seed according to the current system time
     G4long seed=time(0);
@@ -169,6 +172,10 @@ RunAction::RunAction() //(HistoManager* histo)
     analysisManager->CreateNtupleDColumn("ep,2");
     analysisManager->CreateNtupleDColumn("ep,3");
 
+    analysisManager->CreateNtupleDColumn("total,1");
+    analysisManager->CreateNtupleDColumn("total,2");
+    analysisManager->CreateNtupleDColumn("total,3");
+
     analysisManager->FinishNtuple();
 
 
@@ -219,6 +226,10 @@ RunAction::RunAction() //(HistoManager* histo)
     accMan->RegisterAccumulable(fep1Dose);
     accMan->RegisterAccumulable(fep2Dose);
     accMan->RegisterAccumulable(fep3Dose);
+    // total (so positron component can be considered separately)
+    accMan->RegisterAccumulable(f1Dose);
+    accMan->RegisterAccumulable(f2Dose);
+    accMan->RegisterAccumulable(f3Dose);
 
 
 }
@@ -260,17 +271,25 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 
 //    if ( IsMaster() ) {
 
-    G4double total1 = fp1Dose.GetValue() + fd1Dose.GetValue() + ft1Dose.GetValue() + fa1Dose.GetValue() 
-        + fBe1Dose.GetValue() + fB1Dose.GetValue() + fC1Dose.GetValue() + fN1Dose.GetValue()
-        + fO1Dose.GetValue() + fe1Dose.GetValue() + fep1Dose.GetValue();
-    
-    G4double total2 = fp2Dose.GetValue() + fd2Dose.GetValue() + ft2Dose.GetValue() + fa2Dose.GetValue()
-        + fBe2Dose.GetValue() + fB2Dose.GetValue() + fC2Dose.GetValue() + fN2Dose.GetValue()
-        + fO2Dose.GetValue() + fe2Dose.GetValue() + fep2Dose.GetValue();
-    
-    G4double total3 = fp3Dose.GetValue() + fd3Dose.GetValue() + ft3Dose.GetValue() + fa3Dose.GetValue()
-        + fBe3Dose.GetValue() + fB3Dose.GetValue() + fC3Dose.GetValue() + fN3Dose.GetValue()
-        + fO3Dose.GetValue() + fe3Dose.GetValue() + fep3Dose.GetValue();
+    G4double total1 = f1Dose.GetValue();
+    G4double total2 = f2Dose.GetValue();
+    G4double total3 = f3Dose.GetValue();
+
+    G4double ep1    = fep1Dose.GetValue();
+    G4double ep2    = fep2Dose.GetValue();
+    G4double ep3    = fep3Dose.GetValue();
+
+//    G4double total1 = fp1Dose.GetValue() + fd1Dose.GetValue() + ft1Dose.GetValue() + fa1Dose.GetValue() 
+//        + fBe1Dose.GetValue() + fB1Dose.GetValue() + fC1Dose.GetValue() + fN1Dose.GetValue()
+//        + fO1Dose.GetValue() + fe1Dose.GetValue() + fep1Dose.GetValue();
+//    
+//    G4double total2 = fp2Dose.GetValue() + fd2Dose.GetValue() + ft2Dose.GetValue() + fa2Dose.GetValue()
+//        + fBe2Dose.GetValue() + fB2Dose.GetValue() + fC2Dose.GetValue() + fN2Dose.GetValue()
+//        + fO2Dose.GetValue() + fe2Dose.GetValue() + fep2Dose.GetValue();
+//    
+//    G4double total3 = fp3Dose.GetValue() + fd3Dose.GetValue() + ft3Dose.GetValue() + fa3Dose.GetValue()
+//        + fBe3Dose.GetValue() + fB3Dose.GetValue() + fC3Dose.GetValue() + fN3Dose.GetValue()
+//        + fO3Dose.GetValue() + fe3Dose.GetValue() + fep3Dose.GetValue();
     
 //    fHistoManager->FillNTuple(
 //        fp1Dose.GetValue() / total1, fp2Dose.GetValue() / total2, fp3Dose.GetValue() / total3,
@@ -291,7 +310,7 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
     analysisManager->FillNtupleDColumn(0,  fp1Dose.GetValue() / total1);
     analysisManager->FillNtupleDColumn(1,  fp2Dose.GetValue() / total2);
     analysisManager->FillNtupleDColumn(2,  fp3Dose.GetValue() / total3);
-    
+
     analysisManager->FillNtupleDColumn(3,  fd1Dose.GetValue() / total1);
     analysisManager->FillNtupleDColumn(4,  fd2Dose.GetValue() / total2);
     analysisManager->FillNtupleDColumn(5,  fd3Dose.GetValue() / total3);
@@ -299,27 +318,27 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
     analysisManager->FillNtupleDColumn(6,  ft1Dose.GetValue() / total1);
     analysisManager->FillNtupleDColumn(7,  ft2Dose.GetValue() / total2);
     analysisManager->FillNtupleDColumn(8,  ft3Dose.GetValue() / total3);
-    
+
     analysisManager->FillNtupleDColumn(9,  fa1Dose.GetValue() / total1);
     analysisManager->FillNtupleDColumn(10, fa2Dose.GetValue() / total2);
     analysisManager->FillNtupleDColumn(11, fa3Dose.GetValue() / total3);
-    
+
     analysisManager->FillNtupleDColumn(12, fBe1Dose.GetValue() / total1);
     analysisManager->FillNtupleDColumn(13, fBe2Dose.GetValue() / total2);
     analysisManager->FillNtupleDColumn(14, fBe3Dose.GetValue() / total3);
-    
+
     analysisManager->FillNtupleDColumn(15, fB1Dose.GetValue() / total1);
     analysisManager->FillNtupleDColumn(16, fB2Dose.GetValue() / total2);
     analysisManager->FillNtupleDColumn(17, fB3Dose.GetValue() / total3);
-    
+
     analysisManager->FillNtupleDColumn(18, fC1Dose.GetValue() / total1);
     analysisManager->FillNtupleDColumn(19, fC2Dose.GetValue() / total2);
     analysisManager->FillNtupleDColumn(20, fC3Dose.GetValue() / total3);
-    
+
     analysisManager->FillNtupleDColumn(21, fN1Dose.GetValue() / total1);
     analysisManager->FillNtupleDColumn(22, fN2Dose.GetValue() / total2);
     analysisManager->FillNtupleDColumn(23, fN3Dose.GetValue() / total3);
-    
+
     analysisManager->FillNtupleDColumn(24, fO1Dose.GetValue() / total1);
     analysisManager->FillNtupleDColumn(25, fO2Dose.GetValue() / total2);
     analysisManager->FillNtupleDColumn(26, fO3Dose.GetValue() / total3);
@@ -328,9 +347,13 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
     analysisManager->FillNtupleDColumn(28, fe2Dose.GetValue() / total2);
     analysisManager->FillNtupleDColumn(29, fe3Dose.GetValue() / total3);
     
-    analysisManager->FillNtupleDColumn(30, fep1Dose.GetValue() / total1);
-    analysisManager->FillNtupleDColumn(31, fep2Dose.GetValue() / total2);
-    analysisManager->FillNtupleDColumn(32, fep3Dose.GetValue() / total3);
+    analysisManager->FillNtupleDColumn(30, ep1 / (total1 + ep1));
+    analysisManager->FillNtupleDColumn(31, ep2 / (total2 + ep2));
+    analysisManager->FillNtupleDColumn(32, ep3 / (total3 + ep3));
+    
+    analysisManager->FillNtupleDColumn(33, total1);
+    analysisManager->FillNtupleDColumn(34, total2);
+    analysisManager->FillNtupleDColumn(35, total3);
 
     analysisManager->AddNtupleRow();
     
