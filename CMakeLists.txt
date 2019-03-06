@@ -51,7 +51,7 @@ install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 # -----------------------------------------------------------------------------
 # --- Copy MAC files 
 # ------------------------------------------------------------------------------
-file(GLOB MAC_FILES ${PROJECT_SOURCE_DIR}/*.mac ${PROJECT_SOURCE_DIR}/*.in ${PROJECT_SOURCE_DIR}/*.py 
+file(GLOB MAC_FILES ${PROJECT_SOURCE_DIR}/*.mac ${PROJECT_SOURCE_DIR}/*.in
     ${PROJECT_SOURCE_DIR}/*.sh ${PROJECT_SOURCE_DIR}/*.csv)
 #${PROJECT_SOURCE_DIR}/*.sh
 #   ${PROJECT_SOURCE_DIR}/*.csh)
