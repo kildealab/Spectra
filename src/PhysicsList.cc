@@ -57,7 +57,7 @@ PhysicsList::PhysicsList()
     RegisterPhysics(new G4DecayPhysics(verbosity));
     RegisterPhysics(new G4RadioactiveDecayPhysics(verbosity));
 
-    // For the photons
+    // For the photons and electrons
     RegisterPhysics(new G4EmLivermorePhysics(verbosity));
    
     //G4NeutronHPManager::GetInstance()->SetVerboseLevel(4); 

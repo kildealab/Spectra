@@ -27,7 +27,7 @@ G4ClassificationOfNewTrack StackingAction::ClassifyNewTrack(const G4Track* aTrac
     const G4ParticleDefinition* particleType = aTrack->GetParticleDefinition();
     G4String pName  = particleType->GetParticleName();
     G4double charge = particleType->GetPDGCharge();
-    G4double eKin   = aTrack->GetKineticEnergy();
+    G4double eKin   = aTrack->GetKineticEnergy(); // GetVertexKineticEnergy?
 
     // Only looking to kill charged particles and electrons below 1 MeV
     if ( charge != 0.0 ) {
