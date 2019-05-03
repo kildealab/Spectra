@@ -45,18 +45,21 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
             G4String volName = aStep->GetPreStepPoint()->GetPhysicalVolume()->GetName();
             if ( volName == "Target1" ) {
                 fRunAction->Sume1Dose(eKin/eV);
+                fRunAction->Sum1Dose(eKin/eV);
                 G4AnalysisManager::Instance()->FillH1(9,eKin/eV);
                 
                 //G4cout << "An electron with energy " << eKin/keV << " keV was killed in Target1" << G4endl;
             }
             else if ( volName == "Target2" ) {
                 fRunAction->Sume2Dose(eKin/eV);
+                fRunAction->Sum2Dose(eKin/eV);
                 G4AnalysisManager::Instance()->FillH1(21,eKin/eV);
                 
                 //G4cout << "An electron with energy " << eKin/keV << " keV was killed in Target2" << G4endl;
             }
             else if ( volName == "Target3" ) {
                 fRunAction->Sume3Dose(eKin/eV);
+                fRunAction->Sum3Dose(eKin/eV);
                 G4AnalysisManager::Instance()->FillH1(33,eKin/eV);
                 
                 //G4cout << "An electron with energy " << eKin/keV << " keV was killed in Target3" << G4endl;
