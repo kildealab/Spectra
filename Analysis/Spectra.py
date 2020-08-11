@@ -334,77 +334,6 @@ for i in newParticle:
 
 fig = plt.figure(figsize=(9,6))
 
-#ax = fig.add_subplot(111)
-
-# Set a colormap that samples over some range as many times as there are energies
-# colors = cm.rainbow(np.linspace(0, 1, 3))
-
-#sns.set() # Use seaborn defaults rather than matplotlib
-
-# Choose one of 5 themes (darkgrid (default), whitegrid, dark, white, ticks)
-# A parameter dictionary can also be passed as a second argument
-#sns.set_style('white', {'xtick.bottom': True, 'ytick.left': True}) 
-
-#print(sns.axes_style()) # Check style settings (defaults given below)
-#{'axes.axisbelow': True,
-#  'axes.edgecolor': '.8',
-#  'axes.facecolor': 'white',
-#  'axes.grid': True,
-#  'axes.labelcolor': '.15',
-#  'axes.spines.bottom': True,
-#  'axes.spines.left': True,
-#  'axes.spines.right': True,
-#  'axes.spines.top': True,
-#  'figure.facecolor': 'white',
-#  'font.family': ['sans-serif'],
-#  'font.sans-serif': ['Arial',
-#   'DejaVu Sans',
-#   'Liberation Sans',
-#   'Bitstream Vera Sans',
-#   'sans-serif'],
-#  'grid.color': '.8',
-#  'grid.linestyle': '-',
-#  'image.cmap': 'rocket',
-#  'lines.solid_capstyle': 'round',
-#  'patch.edgecolor': 'w',
-#  'patch.force_edgecolor': True,
-#  'text.color': '.15',
-#  'xtick.bottom': False,
-#  'xtick.color': '.15',
-#  'xtick.direction': 'out',
-#  'xtick.top': False,
-#  'ytick.color': '.15',
-#  'ytick.direction': 'out',
-#  'ytick.left': False,
-#  'ytick.right': False}
-
-# Scales size/aspect ratio of plot. Paper, notebook (default), talk or poster are the options
-#sns.set_context('notebook', rc={'axes.labelsize': 14, 'xtick.labelsize': 12, 'ytick.labelsize': 12, 'legend.fontsize': 12}) 
-#print(sns.plotting_context())
-# {'font.size': 9.600000000000001, 
-# 'axes.labelsize': 9.600000000000001, 
-# 'axes.titlesize': 9.600000000000001, 
-# 'xtick.labelsize': 8.8, 
-# 'ytick.labelsize': 8.8, 
-# 'legend.fontsize': 8.8, 
-# 'axes.linewidth': 1.0, 
-# 'grid.linewidth': 0.8, 
-# 'lines.linewidth': 1.2000000000000002, 
-# 'lines.markersize': 4.800000000000001, 
-# 'patch.linewidth': 0.8, 
-# 'xtick.major.width': 1.0, 
-# 'ytick.major.width': 1.0, 
-# 'xtick.minor.width': 0.8, 
-# 'ytick.minor.width': 0.8, 
-# 'xtick.major.size': 4.800000000000001, 
-# 'ytick.major.size': 4.800000000000001, 
-# 'xtick.minor.size': 3.2, 
-# 'ytick.minor.size': 3.2}
-
-#sns.set_palette('husl', len(newParticle))
-#sns.set_palette('cubehelix', len(energy))
-#sns.set_palette('deep', len(energy))
-
 #edgesForPlot = [i*1e-3 for i in edges[:-1]]
 edgesForPlot = []
 for i in range(len(edges)-1):
@@ -454,8 +383,8 @@ date = paths[1]
 dirName = '/home/clund/Documents/McGill/MScThesis/Thesis/Figures/Final/'
 #print(dirName)
 os.makedirs(dirName, exist_ok=True)
-#fileName = 'Scorer'+str(scorer)+'_alphas_'+energy.replace('_', '')+'_'+date+'_Final'
-fileName = 'Electrons_'+str(scorer)+'_'+energy.replace('_','')
+fileName = 'Scorer'+str(scorer)+'_'+energy.replace('_', '')+'_'+date+'_Final'
+#fileName = 'Electrons_'+str(scorer)+'_'+energy.replace('_','')
 plt.savefig(dirName+fileName+'.eps', 
         format='eps', 
         dpi=800,
