@@ -35,26 +35,21 @@ PhysicsList::PhysicsList()
     // Their energy will just be said to be deposited within the step that should have generated them as a separate track.
     SetDefaultCutValue(0*mm);
     
-    // high-precision elastic scattering of neutrons - valid up to 20 MeV
+    // High-precision elastic scattering of neutrons with improved thermal scattering - valid up to 20 MeV
     RegisterPhysics(new HadronElasticPhysicsHP(verbosity));
 
-    // recommended constructor for high-precision inelastic scattering, capture, and fission in medical applications
+    // Recommended constructor for high-precision inelastic scattering, capture, and fission in medical applications
     RegisterPhysics(new G4HadronPhysicsQGSP_BIC_HP(verbosity));
 
-    // WHAT DOES THIS DO
+    // Nuclear capture of some hadrons (not neutrons) and heavy leptons - not too relevant here
     RegisterPhysics(new G4StoppingPhysics(verbosity));
 
-    // DO I NEED THIS FOR NEUTRONS? DOUBT IT
-    RegisterPhysics(new G4IonPhysics(verbosity));
+    // RegisterPhysics(new G4NeutronTrackingCut(verbosity));
 
-    // WHAT IS THIS FOR
-//    RegisterPhysics(new G4IonBinaryCascadePhysics());
-
-    // WHAT DOES THIS DO?
-    RegisterPhysics(new G4NeutronTrackingCut(verbosity));
-
-    // WHAT IS THE DIFFERENCE
+    // In-flight decay - not very important given lifetime of free neutrons, but probably worth including
     RegisterPhysics(new G4DecayPhysics(verbosity));
+    
+    // Radioactive decay - for Co-60 reference radiation
     RegisterPhysics(new G4RadioactiveDecayPhysics(verbosity));
 
     // For the photons and electrons
